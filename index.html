@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Fuel Tracker</title>
+  <meta name="theme-color" content="#667eea" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#667eea" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f6fa;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+  
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 1rem;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+  
+    .header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+  
+    .header h1 {
+      margin-bottom: 0.3rem;
+      color: #4c51bf;
+    }
+  
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+  
+    .form-group {
+      flex: 1;
+      min-width: 120px;
+    }
+  
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      color: #4a5568;
+    }
+  
+    input[type="number"] {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #cbd5e0;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+  
+    .radio-group {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+    }
+  
+    .radio-group label {
+      background: #edf2f7;
+      padding: 0.4rem;
+      border-radius: 6px;
+      text-align: center;
+      cursor: pointer;
+    }
+  
+    .radio-group input {
+      margin-right: 4px;
+    }
+  
+    .info {
+      background: #f0f4ff;
+      padding: 0.8rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+  
+    .btn {
+      padding: 0.6rem 1rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-right: 0.5rem;
+    }
+  
+    .btn-primary {
+      background: #667eea;
+      color: white;
+    }
+  
+    .btn-secondary {
+      background: #e2e8f0;
+      color: #2d3748;
+    }
+  
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+  
+    .data-table th, .data-table td {
+      padding: 0.75rem;
+      border-bottom: 1px solid #e2e8f0;
+      text-align: left;
+    }
+  
+    .data-table th {
+      background: #edf2f7;
+      color: #4a5568;
+    }
+  
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+  
+    .tab-content.active {
+      display: block;
+    }
+  
+    .bottom-nav {
+      display: flex;
+      justify-content: space-around;
+      padding: 0.6rem 0;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
+      z-index: 10;
+    }
+  
+    .nav-item {
+      flex-grow: 1;
+      text-align: center;
+      color: #a0aec0;
+      font-weight: 500;
+      padding: 0.5rem;
+    }
+  
+    .nav-item.active {
+      color: #4c51bf;
+      font-weight: bold;
+    }
+  
+    .nav-icon {
+      font-size: 1.2rem;
+    }
+  
+    .nav-text {
+      font-size: 0.85rem;
+    }
+  
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+  
+    #analytics canvas {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+  </style>  
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>⛽ Fuel Tracker</h1>
+      <p>Track your fuel consumption & mileage</p>
+    </div>
+
+    <div id="add" class="tab-content active">
+        <form 
+        id="fuel-form"
+        action="https://docs.google.com/forms/d/e/1FAIpQLScZoM6Yq-fyP5LNNlX1QmMzq3jzN37VHmTkJlkWJwpyQ1ouWg/formResponse"
+        method="POST"
+        target="_self"
+        >
+
+
+        <div class="form-row">
+            <div class="form-group">
+            <label>Odometer Reading (km)</label>
+            <input type="number" step="0.1" name="entry.1117839843" id="odometer" required />
+            </div>
+            <div class="form-group">
+            <label>Fuel Price/Ltr (₹)</label>
+            <input type="number" step="0.01" name="entry.1298906393" id="price" required />
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+            <label>Quantity (Liters)</label>
+            <input type="number" step="0.01" name="entry.576562043" id="qty" required />
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+            <label>Previous Bar Reading</label>
+            <div class="radio-group">
+                <label><input type="radio" name="entry.1684131646" value="1" required /> 1</label>
+                <label><input type="radio" name="entry.1684131646" value="2" /> 2</label>
+                <label><input type="radio" name="entry.1684131646" value="3" /> 3</label>
+                <label><input type="radio" name="entry.1684131646" value="4" /> 4</label>
+                <label><input type="radio" name="entry.1684131646" value="5" /> 5</label>
+                <label><input type="radio" name="entry.1684131646" value="6" /> 6</label>
+                <label><input type="radio" name="entry.1684131646" value="7" /> 7</label>
+                <label><input type="radio" name="entry.1684131646" value="8" /> 8</label>
+            </div>
+            </div>
+
+            <div class="form-group">
+            <label>Current Bar Reading</label>
+            <div class="radio-group">
+                <label><input type="radio" name="entry.2023811171" value="1" required /> 1</label>
+                <label><input type="radio" name="entry.2023811171" value="2" /> 2</label>
+                <label><input type="radio" name="entry.2023811171" value="3" /> 3</label>
+                <label><input type="radio" name="entry.2023811171" value="4" /> 4</label>
+                <label><input type="radio" name="entry.2023811171" value="5" /> 5</label>
+                <label><input type="radio" name="entry.2023811171" value="6" /> 6</label>
+                <label><input type="radio" name="entry.2023811171" value="7" /> 7</label>
+                <label><input type="radio" name="entry.2023811171" value="8" /> 8</label>
+            </div>
+            </div>
+        </div>
+
+        <div class="info">
+            <strong>Calculated Total Price:</strong> ₹<span id="total-display">0.00</span><br />
+            <strong>Estimated Mileage:</strong> <span id="mileage">-</span> km/L
+        </div>
+
+        <button type="submit" class="btn btn-primary">💾 Add Entry</button>
+        <button type="button" class="btn btn-secondary" onclick="resetForm()">🔄 Reset</button>
+        </form>
+    </div>
+
+    <div id="view" class="tab-content">
+        <h2 style="margin-bottom: 20px; color: #667eea;">📋 Fuel Records</h2>
+
+        
+        <div style="overflow-x: auto;">
+            <table class="data-table" id="records-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Odometer</th>
+                        <th>Avg Price/L</th>
+                        <th>Total Quantity</th>
+                        <th>Total Price</th>
+                        <th>Mileage</th>
+                    </tr>
+                </thead>
+                <tbody id="records-body">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="analytics" class="tab-content">
+        <h2>📊 Analytics</h2>
+        <div style="max-width: 400px; margin: 5px;">
+          <canvas id="mileageChart" style="width: 300%; height: 350px;"></canvas>
+        </div>
+      </div>
+      
+
+    <div class="bottom-nav">
+        <div class="nav-item active" onclick="showTab('add')">
+            <div class="nav-icon">➕</div>
+            <div class="nav-text">Add</div>
+        </div>
+        <div class="nav-item" onclick="showTab('view')">
+            <div class="nav-icon">📋</div>
+            <div class="nav-text">Records</div>
+        </div>
+        <div class="nav-item" onclick="showTab('analytics')">
+            <div class="nav-icon">📊</div>
+            <div class="nav-text">Analytics</div>
+        </div>
+    </div>
+</div>
+  </div>
+
+  <script>
+    
+    const form = document.getElementById("fuel-form");
+    const price = document.getElementById("price");
+    const qty = document.getElementById("qty");
+    const odometer = document.getElementById("odometer");
+    const mileage = document.getElementById("mileage");
+    const totalDisplay = document.getElementById("total-display");
+
+    function updateCalc() {
+      const p = parseFloat(price.value);
+      const q = parseFloat(qty.value);
+      const odo = parseFloat(odometer.value);
+      const pb = parseFloat(document.querySelector("input[name='entry.1684131646']:checked")?.value);
+      const cb = parseFloat(document.querySelector("input[name='entry.2023811171']:checked")?.value);
+
+      totalDisplay.textContent = (!isNaN(p) && !isNaN(q)) ? (p * q).toFixed(2) : "0.00";
+      mileage.textContent = (!isNaN(odo) && !isNaN(pb) && !isNaN(cb) && cb > pb)
+        ? (odo / (cb - pb)).toFixed(2)
+        : "-";
+    }
+
+    function resetForm() {
+      form.reset();
+      totalDisplay.textContent = "0.00";
+      mileage.textContent = "-";
+    }
+
+    function loadFromGoogleSheets() {
+        const spreadsheetId = '17M7x1SEoehi8dtI2jq-TWIDbTLOTSn-4HexGzfBXbEA';
+        const sheetName = 'Sheet3';
+        const url = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq?sheet=${sheetName}`;
+
+
+    fetch(url)
+      .then(res => res.text())
+      .then(data => {
+        const jsonData = JSON.parse(data.match(/(?<=\().*(?=\);)/)[0]);
+        const rows = jsonData.table.rows;
+        const tableBody = document.getElementById("records-body");
+        tableBody.innerHTML = ""; // Clear old data
+
+        rows.forEach(row => {
+          const cells = row.c;
+          const tr = document.createElement("tr");
+
+          tr.innerHTML = `
+            <td>${cells[0]?.v || ''}</td>
+            <td>${cells[1]?.v || ''}</td>
+            <td>${cells[2]?.v || ''}</td>
+            <td>${cells[3]?.v || ''}</td>
+            <td>${cells[4]?.v || ''}</td>
+            <td>${cells[5]?.v ||'-'}</td>
+            <td>${cells[6]?.v}</td>  <!-- MILEAGE column -->
+          `;
+          tableBody.appendChild(tr);
+        });
+      })
+      .catch(err => {
+        console.error("Error loading data:", err);
+      });
+  }
+  let mileageChart; // store chart instance globally
+
+function updateAnalytics() {
+  const spreadsheetId = '17M7x1SEoehi8dtI2jq-TWIDbTLOTSn-4HexGzfBXbEA';
+  const sheetName = 'Sheet3';
+  const url = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq?sheet=${sheetName}`;
+
+  fetch(url)
+    .then(res => res.text())
+    .then(data => {
+      const jsonData = JSON.parse(data.match(/(?<=\().*(?=\);)/)[0]);
+      const rows = jsonData.table.rows;
+
+      const labels = []; // Dates
+      const mileageData = []; // Mileage (km/ltr)
+
+      rows.forEach(row => {
+        const date = row.c[0]?.v;
+        const mileage = parseFloat(row.c[6]?.v);
+        if (date && !isNaN(mileage)) {
+          labels.push(date);
+          mileageData.push(mileage);
+        }
+      });
+
+      // Destroy old chart if exists
+      if (mileageChart) {
+        mileageChart.destroy();
+      }
+
+      const ctx = document.getElementById('mileageChart').getContext('2d');
+      mileageChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [{
+            label: 'Mileage (km/ltr)',
+            data: mileageData,
+            borderColor: 'rgba(75, 192, 192, 1)',
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            tension: 0.3,
+            fill: true,
+            pointRadius: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              title: { display: true, text: 'km/ltr' },
+              beginAtZero: false
+            },
+            x: {
+              title: { display: true, text: 'Date' }
+            }
+          }
+        }
+      });
+    })
+    .catch(err => {
+      console.error("Error loading analytics data:", err);
+    });
+}
+
+    
+
+  
+    function showTab(tabName, event) {
+        // Hide all tabs
+        document.querySelectorAll('.tab-content').forEach(tab => {
+            tab.classList.remove('active');
+        });
+
+        // Show selected tab
+        document.getElementById(tabName).classList.add('active');
+
+        // Update nav item highlight
+        document.querySelectorAll('.bottom-nav .nav-item').forEach(item => {
+            item.classList.remove('active');
+        });
+        if (event?.currentTarget) {
+            event.currentTarget.classList.add('active');
+        }
+
+        // Optional: auto-load content
+        if (tabName === 'view') {
+            setTimeout(loadFromGoogleSheets, 50); // slight delay helps on mobile
+        }
+
+        if (tabName === 'analytics') {
+            updateAnalytics?.();
+        }
+    }
+
+  
+
+
+
+    form.addEventListener("input", updateCalc);
+
+    form.addEventListener("submit", function () {
+      setTimeout(() => {
+        alert("Entry submitted! Check your Google Sheet.");
+        resetForm();
+      }, 1000);
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+  // Always load once on page load
+  loadFromGoogleSheets();
+
+  // Optional: Load analytics too if needed
+  if (document.getElementById("analytics").classList.contains("active")) {
+    updateAnalytics();
+  }
+});
+
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker
+        .register('./service-worker.js')
+        .then(() => console.log("Service Worker Registered"))
+        .catch(err => console.log("SW registration failed:", err));
+    });
+  }
+
+
+
+  </script>
+</body>
+</html>
