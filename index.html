@@ -616,10 +616,21 @@
             <div class="nav-text">Analytics</div>
         </div>
     </div>
+      <!-- Maintenance Section -->
+  <div id="maintenance-section" class="container" style="display: none; text-align: center; padding: 2em;">
+    <h2 style="font-size: 2em; color: #444;">🛠️ Maintenance</h2>
+    <p style="font-size: 1.5em; color: #999; margin-top: 1em;">🚧 Feature Coming Soon!!</p>
+  </div>
+  
 </div>
+
   </div>
 
-</div>
+
+
+
+
+
   <script>
     function openNav() {
   document.getElementById("mySidenav").style.width = "250px";
@@ -631,17 +642,25 @@ function closeNav() {
 }
 
 function showSection(section) {
-  const fuel = document.getElementById('fuel-section') || document.querySelector('.container');
-  const maintenance = document.getElementById('maintenance-section');
+  // 1️⃣ Hide ALL sections
+  document.getElementById("add").style.display = "none";
+  document.getElementById("view").style.display = "none";
+  document.getElementById("analytics").style.display = "none";
+  document.getElementById("maintenance-section").style.display = "none";
 
+  // 2️⃣ If fuel is selected, show fuel-related sections
   if (section === 'fuel') {
-    fuel.style.display = 'block';
-    if (maintenance) maintenance.style.display = 'none';
-  } else {
-    fuel.style.display = 'none';
-    if (maintenance) maintenance.style.display = 'block';
+    document.getElementById("add").style.display = "block";
+    document.getElementById("view").style.display = "block";
+    document.getElementById("analytics").style.display = "block";
+  }
+
+  // 3️⃣ If maintenance is selected, show maintenance section only
+  else if (section === 'maintenance') {
+    document.getElementById("maintenance-section").style.display = "block";
   }
 }
+
     
     const form = document.getElementById("fuel-form");
     const price = document.getElementById("price");
@@ -901,6 +920,9 @@ if ('serviceWorker' in navigator) {
         .catch(err => console.log("SW registration failed:", err));
     });
   }
+
+
+
 
 
 
