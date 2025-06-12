@@ -182,88 +182,392 @@
       max-width: 100%;
       height: auto;
     }
+    * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 420px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            position: relative;
+            padding-bottom: 80px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 20px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .form-group input[type="number"] {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 16px;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input[type="number"]:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .radio-group {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 14px;
+            background: #f8f9fa;
+        }
+
+        .radio-group label:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .radio-group input[type="radio"] {
+            display: none;
+        }
+
+        .radio-group input[type="radio"]:checked + label,
+        .radio-group label:has(input[type="radio"]:checked) {
+            border-color: #667eea;
+            background: #667eea;
+            color: white;
+        }
+
+        .info {
+            background: #f8f9fa;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+        }
+
+        .info strong {
+            color: #667eea;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #6c757d;
+            border: 2px solid #e1e5e9;
+        }
+
+        .btn-secondary:hover {
+            background: #e9ecef;
+            border-color: #adb5bd;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            max-width: 420px;
+            width: 100%;
+            background: white;
+            border-top: 1px solid #e1e5e9;
+            display: flex;
+            justify-content: space-around;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-item {
+            flex: 1;
+            text-align: center;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #6c757d;
+        }
+
+        .nav-item.active {
+            color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .nav-item:hover {
+            background: #f8f9fa;
+        }
+
+        .nav-icon {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        .nav-text {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .data-table th {
+            background: #667eea;
+            color: white;
+            padding: 12px 8px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .data-table td {
+            padding: 12px 8px;
+            border-bottom: 1px solid #e1e5e9;
+            font-size: 13px;
+        }
+
+        .data-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                max-width: 100%;
+            }
+            
+            .radio-group {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 6px;
+            }
+            
+            .radio-group label {
+                padding: 8px 4px;
+                font-size: 13px;
+            }
+            
+            .data-table th,
+            .data-table td {
+                padding: 8px 4px;
+                font-size: 11px;
+            }
+        }
+
+        .sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 12px 32px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #ccc;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: white;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  font-size: 36px;
+  color: white;
+}
+
   </style>  
 </head>
 <body>
+  
   <div class="container">
     <div class="header">
       <h1>⛽ Fuel Tracker</h1>
       <p>Track your fuel consumption & mileage</p>
     </div>
-
-    <div id="add" class="tab-content active">
-        <form 
-        id="fuel-form"
-        action="https://docs.google.com/forms/d/e/1FAIpQLScZoM6Yq-fyP5LNNlX1QmMzq3jzN37VHmTkJlkWJwpyQ1ouWg/formResponse"
-        method="POST"
-        target="_self"
-        >
-
-
-        <div class="form-row">
-            <div class="form-group">
-            <label>Odometer Reading (km)</label>
-            <input type="number" step="0.1" name="entry.1117839843" id="odometer" required />
-            </div>
-            <div class="form-group">
-            <label>Fuel Price/Ltr (₹)</label>
-            <input type="number" step="0.01" name="entry.1298906393" id="price" required />
-            </div>
-        </div>
-
-        <div class="form-row">
-            <div class="form-group">
-            <label>Quantity (Liters)</label>
-            <input type="number" step="0.01" name="entry.576562043" id="qty" required />
-            </div>
-        </div>
-
-        <div class="form-row">
-            <div class="form-group">
-            <label>Previous Bar Reading</label>
-            <div class="radio-group">
-                <label><input type="radio" name="entry.1684131646" value="1" required /> 1</label>
-                <label><input type="radio" name="entry.1684131646" value="2" /> 2</label>
-                <label><input type="radio" name="entry.1684131646" value="3" /> 3</label>
-                <label><input type="radio" name="entry.1684131646" value="4" /> 4</label>
-                <label><input type="radio" name="entry.1684131646" value="5" /> 5</label>
-                <label><input type="radio" name="entry.1684131646" value="6" /> 6</label>
-                <label><input type="radio" name="entry.1684131646" value="7" /> 7</label>
-                <label><input type="radio" name="entry.1684131646" value="8" /> 8</label>
-            </div>
-            </div>
-
-            <div class="form-group">
-            <label>Current Bar Reading</label>
-            <div class="radio-group">
-                <label><input type="radio" name="entry.2023811171" value="1" required /> 1</label>
-                <label><input type="radio" name="entry.2023811171" value="2" /> 2</label>
-                <label><input type="radio" name="entry.2023811171" value="3" /> 3</label>
-                <label><input type="radio" name="entry.2023811171" value="4" /> 4</label>
-                <label><input type="radio" name="entry.2023811171" value="5" /> 5</label>
-                <label><input type="radio" name="entry.2023811171" value="6" /> 6</label>
-                <label><input type="radio" name="entry.2023811171" value="7" /> 7</label>
-                <label><input type="radio" name="entry.2023811171" value="8" /> 8</label>
-            </div>
-            </div>
-        </div>
-
-        <div class="info">
-            <strong>Calculated Total Price:</strong> ₹<span id="total-display">0.00</span><br />
-            <strong>Estimated Mileage:</strong> <span id="mileage">-</span> km/L
-        </div>
-
-        <button type="submit" class="btn btn-primary">💾 Add Entry</button>
-        <button type="button" class="btn btn-secondary" onclick="resetForm()">🔄 Reset</button>
-        </form>
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="#" onclick="showSection('fuel'); closeNav();">⛽ Fuel Info</a>
+      <a href="#" onclick="showSection('maintenance'); closeNav();">🛠️ Maintenance</a>
     </div>
+    <span style="font-size:30px; cursor:pointer; color: black; display:block; margin: 10px 0;" onclick="openNav()">&#9776;</span>
+
+    <div id="fuel-section" class="container">
+    <div id="add" class="tab-content active">
+      <form 
+      id="fuel-form"
+      action="https://docs.google.com/forms/d/e/1FAIpQLScZoM6Yq-fyP5LNNlX1QmMzq3jzN37VHmTkJlkWJwpyQ1ouWg/formResponse"
+      method="POST"
+      onsubmit="return false;"
+      >
+      <!-- 📋 Side Drawer -->
+
+
+
+
+      <div class="form-group">
+          <label>Odometer Reading (km)</label>
+          <input type="number" step="0.1" name="entry.1117839843" id="odometer" required />
+      </div>
+  
+      <div class="form-group">
+          <label>Fuel Price/Ltr (₹)</label>
+          <input type="number" step="0.01" name="entry.1298906393" id="price" required />
+      </div>
+  
+      <div class="form-group">
+          <label>Quantity (Liters)</label>
+          <input type="number" step="0.01" name="entry.576562043" id="qty" required />
+      </div>
+  
+      <div class="form-group">
+          <label>Previous Bar Reading</label>
+          <div class="radio-group">
+              <label><input type="radio" name="entry.1684131646" value="1" required /> 1</label>
+              <label><input type="radio" name="entry.1684131646" value="2" /> 2</label>
+              <label><input type="radio" name="entry.1684131646" value="3" /> 3</label>
+              <label><input type="radio" name="entry.1684131646" value="4" /> 4</label>
+              <label><input type="radio" name="entry.1684131646" value="5" /> 5</label>
+              <label><input type="radio" name="entry.1684131646" value="6" /> 6</label>
+              <label><input type="radio" name="entry.1684131646" value="7" /> 7</label>
+              <label><input type="radio" name="entry.1684131646" value="8" /> 8</label>
+          </div>
+      </div>
+  
+      <div class="form-group">
+          <label>Current Bar Reading</label>
+          <div class="radio-group">
+              <label><input type="radio" name="entry.2023811171" value="1" required /> 1</label>
+              <label><input type="radio" name="entry.2023811171" value="2" /> 2</label>
+              <label><input type="radio" name="entry.2023811171" value="3" /> 3</label>
+              <label><input type="radio" name="entry.2023811171" value="4" /> 4</label>
+              <label><input type="radio" name="entry.2023811171" value="5" /> 5</label>
+              <label><input type="radio" name="entry.2023811171" value="6" /> 6</label>
+              <label><input type="radio" name="entry.2023811171" value="7" /> 7</label>
+              <label><input type="radio" name="entry.2023811171" value="8" /> 8</label>
+          </div>
+      </div>
+  
+      <div class="info">
+          <strong>Calculated Total Price:</strong> ₹<span id="total-display">0.00</span><br />
+          <strong>Estimated Mileage:</strong> <span id="mileage">-</span> km/L
+      </div>
+  
+      <button type="submit" class="btn btn-primary">💾 Add Entry</button>
+      <button type="button" class="btn btn-secondary" onclick="resetForm()">🔄 Reset</button>
+      </form>
+  </div>
 
     <div id="view" class="tab-content">
         <h2 style="margin-bottom: 20px; color: #667eea;">📋 Fuel Records</h2>
 
         
-        <div style="overflow-x: auto;">
-            <table class="data-table" id="records-table">
+        <div style="margin-bottom: 1em; display: flex; align-items: center; gap: 1em; flex-wrap: wrap;">
+          <label>From: <input type="date" id="from-date"></label>
+          <label>To: <input type="date" id="to-date"></label>
+          <button onclick="loadFilteredData()">Show Records</button>
+        </div>
+        
+        <div style="max-height: 400px; overflow-y: auto; overflow-x: auto; border: 1px solid #ccc; border-radius: 8px;">
+          <table class="data-table" id="records-table" style="width: 100%; min-width: 600px;">
                 <thead>
                     <tr>
                         <th>Date</th>
@@ -280,14 +584,23 @@
             </table>
         </div>
     </div>
-
     <div id="analytics" class="tab-content">
-        <h2>📊 Analytics</h2>
-        <div style="max-width: 400px; margin: 5px;">
-          <canvas id="mileageChart" style="width: 300%; height: 350px;"></canvas>
-        </div>
+      <h2>📊 Analytics</h2>
+    
+      <!-- 📅 Chart Date Filter UI -->
+      <div style="margin-bottom: 1em; display: flex; align-items: center; gap: 1em; flex-wrap: wrap;">
+        <label>From: <input type="date" id="chart-from-date"></label>
+        <label>To: <input type="date" id="chart-to-date"></label>
+        <button onclick="updateAnalytics()">Update Chart</button>
       </div>
-      
+    
+      <!-- 📊 Chart Container -->
+      <div style="max-width: 400px; margin: 5px; overflow-x: auto;">
+        <canvas id="mileageChart" style="width: 300%; height: 350px;"></canvas>
+      </div>
+    </div>
+    
+    
 
     <div class="bottom-nav">
         <div class="nav-item active" onclick="showTab('add')">
@@ -306,7 +619,29 @@
 </div>
   </div>
 
+</div>
   <script>
+    function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+  showSection('fuel'); // Show Fuel Info by default
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+
+function showSection(section) {
+  const fuel = document.getElementById('fuel-section') || document.querySelector('.container');
+  const maintenance = document.getElementById('maintenance-section');
+
+  if (section === 'fuel') {
+    fuel.style.display = 'block';
+    if (maintenance) maintenance.style.display = 'none';
+  } else {
+    fuel.style.display = 'none';
+    if (maintenance) maintenance.style.display = 'block';
+  }
+}
     
     const form = document.getElementById("fuel-form");
     const price = document.getElementById("price");
@@ -334,26 +669,82 @@
       mileage.textContent = "-";
     }
 
-    function loadFromGoogleSheets() {
-        const spreadsheetId = '17M7x1SEoehi8dtI2jq-TWIDbTLOTSn-4HexGzfBXbEA';
-        const sheetName = 'Sheet3';
-        const url = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq?sheet=${sheetName}`;
+  //   function loadFromGoogleSheets() {
+  //       const spreadsheetId = '17M7x1SEoehi8dtI2jq-TWIDbTLOTSn-4HexGzfBXbEA';
+  //       const sheetName = 'Sheet3';
+  //       const url = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq?sheet=${sheetName}`;
 
 
-    fetch(url)
-      .then(res => res.text())
-      .then(data => {
-        const jsonData = JSON.parse(data.match(/(?<=\().*(?=\);)/)[0]);
-        const rows = jsonData.table.rows;
-        const tableBody = document.getElementById("records-body");
-        tableBody.innerHTML = ""; // Clear old data
+  //   fetch(url)
+  //     .then(res => res.text())
+  //     .then(data => {
+  //       const jsonData = JSON.parse(data.match(/(?<=\().*(?=\);)/)[0]);
+  //       const rows = jsonData.table.rows;
+  //       const tableBody = document.getElementById("records-body");
+  //       tableBody.innerHTML = ""; // Clear old data
 
-        rows.forEach(row => {
-          const cells = row.c;
+  //       rows.forEach(row => {
+  //         const cells = row.c;
+  //         const tr = document.createElement("tr");
+
+  //         tr.innerHTML = `
+  //           <td>${cells[0]?.f || cells[0]?.v || ''}</td>
+  //           <td>${cells[1]?.v || ''}</td>
+  //           <td>${cells[2]?.v || ''}</td>
+  //           <td>${cells[3]?.v || ''}</td>
+  //           <td>${cells[4]?.v || ''}</td>
+  //           <td>${cells[5]?.v ||'-'}</td>
+  //           <td>${cells[6]?.v}</td>  <!-- MILEAGE column -->
+  //         `;
+  //         tableBody.appendChild(tr);
+  //       });
+  //     })
+  //     .catch(err => {
+  //       console.error("Error loading data:", err);
+  //     });
+  // }
+
+
+  function loadFilteredData() {
+  const fromDate = new Date(document.getElementById("from-date").value);
+  const toDate = new Date(document.getElementById("to-date").value);
+
+  if (isNaN(fromDate.getTime()) || isNaN(toDate.getTime())) {
+    alert("❗ Please select both From and To dates.");
+    return;
+  }
+
+  const spreadsheetId = '17M7x1SEoehi8dtI2jq-TWIDbTLOTSn-4HexGzfBXbEA';
+  const sheetName = 'Sheet3';
+  const url = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq?sheet=${sheetName}`;
+
+  fetch(url)
+    .then(res => res.text())
+    .then(data => {
+      const jsonData = JSON.parse(data.match(/(?<=\().*(?=\);)/)[0]);
+      const rows = jsonData.table.rows;
+      const tableBody = document.getElementById("records-body");
+      tableBody.innerHTML = ""; // Clear old data
+
+      rows.forEach(row => {
+        const cells = row.c;
+        const rawDateTime = cells[0]?.f || cells[0]?.v;
+
+        if (!rawDateTime) return;
+
+        // Convert to Date object
+        const [datePart] = rawDateTime.split(" ");
+        const [day, month, year] = datePart.split("/").map(Number);
+        const entryDate = new Date(year, month - 1, day);
+
+        // Filter by selected date range
+        if (entryDate >= fromDate && entryDate <= toDate) {
           const tr = document.createElement("tr");
 
+          const timePart = rawDateTime.includes(" ") ? rawDateTime.split(" ")[1] : "-";
+
           tr.innerHTML = `
-            <td>${cells[0]?.v || ''}</td>
+            <td>${cells[0]?.f || cells[0]?.v || ''}</td>
             <td>${cells[1]?.v || ''}</td>
             <td>${cells[2]?.v || ''}</td>
             <td>${cells[3]?.v || ''}</td>
@@ -362,14 +753,16 @@
             <td>${cells[6]?.v}</td>  <!-- MILEAGE column -->
           `;
           tableBody.appendChild(tr);
-        });
-      })
-      .catch(err => {
-        console.error("Error loading data:", err);
+        }
       });
-  }
-  let mileageChart; // store chart instance globally
+    })
+    .catch(err => {
+      console.error("Error loading filtered data:", err);
+    });
+}
 
+  //################### Mileage chart ##################################
+  let mileageChart; // store chart instance globally
 function updateAnalytics() {
   const spreadsheetId = '17M7x1SEoehi8dtI2jq-TWIDbTLOTSn-4HexGzfBXbEA';
   const sheetName = 'Sheet3';
@@ -432,7 +825,7 @@ function updateAnalytics() {
     });
 }
 
-    
+    //################### Mileage chart ##################################
 
   
     function showTab(tabName, event) {
@@ -468,16 +861,31 @@ function updateAnalytics() {
 
     form.addEventListener("input", updateCalc);
 
-    form.addEventListener("submit", function () {
+    form.addEventListener("submit", function (e) {
+    e.preventDefault(); // 🔒 Stop default redirect
+
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+      method: "POST",
+      body: formData,
+      mode: "no-cors" // ⚠️ Required for Google Forms
+    })
+    .then(() => {
+      alert("✅ Entry submitted!");
+      resetForm();
+
       setTimeout(() => {
-        alert("Entry submitted! Check your Google Sheet.");
-        resetForm();
-      }, 1000);
+    loadFromGoogleSheets();
+    updateAnalytics(); // Optional if needed right after
+  }, 3000); // wait 3 seconds
+    })
+    .catch(() => {
+      alert("❌ Submission failed. Please try again.");
     });
+  });
 
     document.addEventListener("DOMContentLoaded", function () {
-  // Always load once on page load
-  loadFromGoogleSheets();
 
   // Optional: Load analytics too if needed
   if (document.getElementById("analytics").classList.contains("active")) {
